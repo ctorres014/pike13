@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="exit()">
+        <ion-icon  slot="icon-only" name="exit-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      List Of Clients
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let people of peoples">
+      <ion-avatar slot="start">
+        <img [src]="people.profile_photo.x50">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ people.first_name }} {{ people.last_name }}</h2>
+        <h3>{{ people.birthdate | date: 'dd-MM-yyyy' }}</h3>
+        <p>{{ people.email }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
