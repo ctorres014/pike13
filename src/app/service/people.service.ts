@@ -11,7 +11,7 @@ export class PeopleService {
 
   constructor(private http: HttpClient,
               private loginService: LoginService) {
-    
+
   }
 
   async getPeople(): Promise<any> {
@@ -33,8 +33,28 @@ export class PeopleService {
 
   }
 
+  async getPeopleById(peopleId: number){
+    await this.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `Bearer ${ this.loginService.token }`
+      })
+    };
+    return new Promise( resolve => {
+      this.http.get(`${ this.url }/${ peopleId }`, httpOptions )
+              .subscribe( (resp: any) => {
+        resolve(resp.people);
+      }, (err) => {
+        this.loginService.logOut();
+      });
+    });
+  }
+
   private async getToken() {
     await this.loginService.getStorage('token');
   }
+
+  
 
 }

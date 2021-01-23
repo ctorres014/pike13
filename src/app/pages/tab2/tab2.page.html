@@ -1,17 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon slot="icon-only" name="exit-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Client Details
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card *ngFor="let people of peoples">
+        <img [src]="people.profile_photo.x400">
+        <ion-card-header>
+            <ion-card-title>{{ people.name }}</ion-card-title>
+            <ion-card-subtitle>{{ people.email}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+        </ion-card-content>
+    </ion-card>
+
 </ion-content>
