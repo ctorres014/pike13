@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeopleService {
-  private url = 'https://bizit.pike13.com/api/v2/desk/people';
+  // private url = 'https://bizit.pike13.com/api/v2/desk/people';
   private token: string;
 
   constructor(private http: HttpClient,
@@ -23,7 +24,7 @@ export class PeopleService {
       })
     };
     return new Promise( resolve => {
-      this.http.get(this.url, httpOptions )
+      this.http.get(`${environment.api}`, httpOptions )
               .subscribe( (resp: any) => {
         resolve(resp.people);
       }, (err) => {
@@ -42,7 +43,7 @@ export class PeopleService {
       })
     };
     return new Promise( resolve => {
-      this.http.get(`${ this.url }/${ peopleId }`, httpOptions )
+      this.http.get(`${ environment.api }/${ peopleId }`, httpOptions )
               .subscribe( (resp: any) => {
         resolve(resp.people);
       }, (err) => {

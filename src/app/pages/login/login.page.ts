@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IonSlides, NavController } from '@ionic/angular';
+import { AlertController, IonSlides, NavController } from '@ionic/angular';
 import { LoginService } from 'src/app/service/login.service';
 import { UiServiceService } from 'src/app/service/ui-service.service';
 
@@ -52,7 +52,8 @@ export class LoginPage implements OnInit {
 
   constructor(private loginService: LoginService,
               private uiService: UiServiceService,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              public alertController: AlertController) { }
 
   ngOnInit() {
     this.slide.lockSwipes(true);
@@ -65,7 +66,7 @@ export class LoginPage implements OnInit {
   async login(fLogin: NgForm) {
     const isValid = await this.loginService.login();
     if(isValid) {
-      this.navCtrl.navigateRoot('main/tabs/tab1', { animated: true });
+      this.navCtrl.navigateRoot('main', { animated: true });
     } else {
       this.uiService.alertInfo('Error al iniciar sesion');
     }
@@ -86,4 +87,6 @@ export class LoginPage implements OnInit {
     this.slide.slideTo(1);
     this.slide.lockSwipes(true);
   }
+
+  
 }
